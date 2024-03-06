@@ -1,5 +1,46 @@
-# cse-284-project-genomix
-This is a re-implementation of AI-sandbox/gnomix as the course project of CSE 284
+# CSE-284 Project: Mini-Gnomix CLI Tool
+Mini-Gnomix is a re-implementation of AI-sandbox/gnomix as the course project of CSE 284.
+
+## Installation
+
+To install Mini-Gnomix, follow these steps:
+
+1. Clone this repository to your local machine:
+
+    ```bash
+    git clone https://github.com/esihaj/cse-284-project-genomix.git
+    cd cse-284-project-genomix
+    ```
+
+2. Set up a virtual environment (optional but recommended):
+
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # Unix/MacOS
+    # or
+    venv\Scripts\activate  # Windows
+    ```
+
+3. Install the required dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Install Mini-Gnomix:
+
+    ```bash
+    pip install --editable .
+    ```
+
+## Usage
+
+To use Mini-Gnomix, run the following command:
+
+```bash
+mini-gnomix "Your Name"
+```
+
 
 
 # License
