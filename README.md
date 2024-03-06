@@ -8,7 +8,7 @@ To install Mini-Gnomix, follow these steps:
 1. Clone this repository to your local machine:
 
     ```bash
-    git clone https://github.com/esihaj/cse-284-project-genomix.git
+    git clone --recursive https://github.com/esihaj/cse-284-project-genomix.git
     cd cse-284-project-genomix
     ```
 
