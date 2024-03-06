@@ -1,0 +1,3 @@
+[submodule "external/gnomix"]
+	path = external/gnomix
+	url = https://github.com/AI-sandbox/gnomix
