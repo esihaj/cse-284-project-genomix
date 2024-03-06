@@ -1,0 +1,10 @@
+click==8.1.7
+colorama==0.4.6
+markdown-it-py==3.0.0
+mdurl==0.1.2
+-e git+ssh://git@github.com/esihaj/cse-284-project-genomix.git@4b8bfc60e745df97ef99d221f521eed2c20374b9#egg=mini_gnomix
+Pygments==2.17.2
+rich==13.7.1
+shellingham==1.5.4
+typer==0.9.0
+typing_extensions==4.10.0
