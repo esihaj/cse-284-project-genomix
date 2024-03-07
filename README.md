@@ -36,10 +36,18 @@ To install Mini-Gnomix, follow these steps:
 To use Mini-Gnomix, run the following command:
 
 ```bash
+mini-gnomix --help # to list all the commands
 mini-gnomix simulate-data
+mini-gnomix train
+mini-gnomix analyze
 ```
 
+# TODO
 
+- [x] generate simulation data
+- [x] read and parse data
+- [ ] train model
+- [ ] analyze samples 
 
 # License
 Inherited From [gnomix](https://github.com/AI-sandbox/gnomix/blob/main/LICENSE.md)
