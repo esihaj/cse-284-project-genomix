@@ -2,7 +2,7 @@
 Group Number 2, Members: Ehsan Hajyasini & Andre Wang
 
 
-Mini-Gnomix is a re-implementation of AI-sandbox/gnomix as the course project of CSE 284.
+Mini-Gnomix is a re-implementation of [AI-sandbox/gnomix](https://github.com/AI-sandbox/gnomix) as the course project of CSE 284. Mini-Genomix is a tool to perform Local Ancestry Inference. In our implementation we first use gnomix to simulate SNP and LAI data based on a set of non-admixed founder individuals (extracted from 1000 Genomes project). Then we train a logistic regression to perform the classification, followed by XGBoost to perform smoothing.
 
 ## Installation
 
