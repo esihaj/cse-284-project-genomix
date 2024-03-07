@@ -1,5 +1,7 @@
 # CSE-284 Project: Mini-Gnomix CLI Tool
 Group Number 2, Members: Ehsan Hajyasini & Andre Wang
+
+
 Mini-Gnomix is a re-implementation of AI-sandbox/gnomix as the course project of CSE 284.
 
 ## Installation
