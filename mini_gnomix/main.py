@@ -29,6 +29,7 @@ def greet(name: str = typer.Argument(None, help="Your name")):
 @app.command()
 def train(name: str = typer.Argument(None, help="Your name")):
     """Load the data and train the model."""
+    print_green("Loading data...")
     
     base_args = {
         'output_basename': './demo/output',
@@ -36,9 +37,15 @@ def train(name: str = typer.Argument(None, help="Your name")):
         'config_file': "./config.yaml"
     }
     data, meta = get_training_data(base_args)
-    print_green ("Data loaded successfully!")
-    print("data shape: ", data.shape)
+    print_green ("Loaded data successfully!")
+    
     print("meta: ", meta)
+    for i, split in enumerate(data):
+        print(f"Split {i+1}:")
+        for j, array in enumerate(split):
+            label = "SNPs" if j == 0 else "Ancestry windows" if j == 1 else f"Array {j+1}"
+            print(f"  {label}: {array.shape} - {array.dtype}")
+
        
 @app.command()
 def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
