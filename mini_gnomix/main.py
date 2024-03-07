@@ -25,6 +25,7 @@ def analyze(query_file: Annotated[str, typer.Argument()] = "small_query_chr22.vc
             model_path: Annotated[str, typer.Argument()] = "./data/output/model"):
     """Perform local ancestry inference on a query file """
     print_green("Analyzing the query file...")
+    print("Not yet implemented!")
  
 @app.command()
 def train(name: str = typer.Argument(None, help="Your name")):
