@@ -21,10 +21,9 @@ def print_yellow(text):
     print("\033[93m{}\033[00m" .format(text))
     
 @app.command()
-def greet(name: str = typer.Argument(None, help="Your name")):
-    """Greets the user with a name, if provided."""
-    greeting = f"Hello, {name}" if name else "Hello, World!"
-    typer.echo(greeting)
+def analyze(query_file: Annotated[str, typer.Argument()] = "small_query_chr22.vcf.gz",):
+    """Perform local ancestry inference on a query file """
+    print_green("Analyzing the query file...")
  
 @app.command()
 def train(name: str = typer.Argument(None, help="Your name")):
@@ -47,9 +46,7 @@ def train(name: str = typer.Argument(None, help="Your name")):
             shape = f"({array.shape[0]:>5}, {array.shape[1]:>7})"  # Right-align numbers within specified width
             dtype = f"{array.dtype}"
             print(f"  {label:17}: {shape} - {dtype}")
-
-
-       
+      
 @app.command()
 def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
          query_file: Annotated[str, typer.Argument()] = "ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",
@@ -62,7 +59,6 @@ def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
     """Simulated Admixed Training Data Using Gnomix"""
     # This is based on external/gnomix/demo.ipynb
     print(f"Current working directory: {os.getcwd()}")
-    input("Press Enter to continue...")
     
     query_file = os.path.join(data_path, query_file)
     genetic_map_file = os.path.join(data_path, genetic_map_file)
