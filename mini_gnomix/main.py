@@ -6,16 +6,10 @@ import typer
 import shutil
 from typing import Annotated
 
-sys.path.append('./external/gnomix/')
-from gnomix import *
+from .get_data import get_training_data
+
 
 app = typer.Typer()
-
-@app.command()
-def greet(name: str = typer.Argument(None, help="Your name")):
-    """Greets the user with a name, if provided."""
-    greeting = f"Hello, {name}" if name else "Hello, World!"
-    typer.echo(greeting)
 
 def print_green(text):
     print("\033[92m{}\033[00m" .format(text))
@@ -23,6 +17,26 @@ def print_green(text):
 def print_red(text):
     print("\033[91m{}\033[00m" .format(text))
     
+def print_yellow(text):
+    print("\033[93m{}\033[00m" .format(text)
+    
+@app.command()
+def greet(name: str = typer.Argument(None, help="Your name")):
+    """Greets the user with a name, if provided."""
+    greeting = f"Hello, {name}" if name else "Hello, World!"
+    typer.echo(greeting)
+ 
+@app.command()
+def train(name: str = typer.Argument(None, help="Your name")):
+    """Load the data and train the model."""
+    
+    base_args = {
+        'output_basename': './demo/output',
+        'chm': '22',
+        'config_file': "./config.yaml"
+    }
+    data = get_training_data(base_args)     
+       
 @app.command()
 def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
          query_file: Annotated[str, typer.Argument()] = "ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",
@@ -33,6 +47,7 @@ def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
          phase: Annotated[bool, typer.Option("--phased", help="Use phased data")] = False,
          output_basename: Annotated[str, typer.Argument()] = "./demo/output"):
     """Simulated Admixed Training Data Using Gnomix"""
+    # This is based on external/gnomix/demo.ipynb
     print(f"Current working directory: {os.getcwd()}")
     input("Press Enter to continue...")
     
@@ -51,7 +66,7 @@ def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
         sample_file = os.path.join(data_path, "samples_1000g.tsv")
         np.savetxt(sample_file, samples, delimiter="\t", fmt="%s")
         subset_cmd = f"bcftools view -S {sample_file} -o {reference_file} {query_file}"
-        print(f"Running in command line: \n\t{subset_cmd}")
+        print_yellow(f"Running in command line: \n\t{subset_cmd}")
         exit_code = os.system(subset_cmd)
         if exit_code != 0:
             print_red("Error running subset command. Exiting...")
@@ -69,8 +84,8 @@ def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
     print_red("This will take some time!")
     # copy the config.yaml file from "external/gnomix" to here 
     shutil.copy('./external/gnomix/config.yaml', './')
-    print(f"copied config.yaml file from external/gnomix to here. You may delete it later.")
-    print(f"Running in command line: \n\t{train_cmd}")
+    print_yellow(f"copied config.yaml file from external/gnomix to here. You may delete it later.")
+    print_yellow(f"Running in command line: \n\t{train_cmd}")
     exit_code = os.system(train_cmd)
     if exit_code != 0:
         print("Error running train command. Exiting...")
