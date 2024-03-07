@@ -39,12 +39,15 @@ def train(name: str = typer.Argument(None, help="Your name")):
     data, meta = get_training_data(base_args)
     print_green ("Loaded data successfully!")
     
-    print("meta: ", meta)
-    for i, split in enumerate(data):
+    print("meta: ", meta, "\n")
+    for i, group in enumerate(data):
         print(f"Split {i+1}:")
-        for j, array in enumerate(split):
+        for j, array in enumerate(group):
             label = "SNPs" if j == 0 else "Ancestry windows" if j == 1 else f"Array {j+1}"
-            print(f"  {label}: {array.shape} - {array.dtype}")
+            shape = f"({array.shape[0]:>5}, {array.shape[1]:>7})"  # Right-align numbers within specified width
+            dtype = f"{array.dtype}"
+            print(f"  {label:17}: {shape} - {dtype}")
+
 
        
 @app.command()
