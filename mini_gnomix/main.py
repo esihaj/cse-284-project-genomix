@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import pandas as pd
 import typer
+import shutil
 from typing import Annotated
 
 sys.path.append('./external/gnomix/')
@@ -62,10 +63,13 @@ def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
 
     # Simulate the data and train the model
     print_green("Simulating data and training the model...")
-    train_cmd = f"python3 external/gnomix/gnomix.py {query_file} {output_basename} {chm} {'True' if phase else 'False'} {genetic_map_file} {reference_file} {sample_map_file}"
+    train_cmd = f"cd python3 gnomix.py {query_file} {output_basename} {chm} {'True' if phase else 'False'} {genetic_map_file} {reference_file} {sample_map_file}"
     # > ./demo/training_log.txt
     print_red("Remember that you just need to wait until simulation data is done! You don't need to wait for the training process")
     print_red("This will take some time!")
+    # copy the config.yaml file from "external/gnomix" to here 
+    shutil.copy('./external/gnomix/config.yaml', './')
+    print(f"copied config.yaml file from external/gnomix to here. You may delete it later.")
     print(f"Running in command line: \n\t{train_cmd}")
     exit_code = os.system(train_cmd)
     if exit_code != 0:
