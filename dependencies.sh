@@ -14,7 +14,8 @@ if [ -f "demo/data/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.gen
     echo_green "VCF file already exists"
 else
     echo_red "Downloading VCF file"
-    wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz -O demo/data/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz
+    wget https://hgdownload.cse.ucsc.edu/gbdb/hg19/1000Genomes/phase3/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz -O demo/data/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz
+    echo_green "Downloaded VCF file"
 fi
 
 #check if bcftools is already installed
@@ -30,6 +31,7 @@ else
     make -j`nproc`
     sudo make prefix=/usr/local/bin install
     sudo ln -s /usr/local/bin/bin/bcftools /usr/bin/bcftools
+    echo_green "BCFTools is ready"
 fi
 
 # check if the venv exists at dir venv
@@ -38,6 +40,7 @@ if [ -d "venv" ]; then
 else
     echo_red "Creating virtual environment"
     python3 -m venv venv
+    echo_green "Virtual environment is ready"
 fi
 
 source venv/bin/activate
