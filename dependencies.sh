@@ -45,9 +45,6 @@ fi
 
 source venv/bin/activate
 echo_red "Installing pip requirements.txt"
-
 pip install -r requirements.txt
-echo_red "Installing Gnomix pip requirements.txt"
-pip install -r external/gnomix/requirements.txt
 
 echo_green "Dependencies installed"
