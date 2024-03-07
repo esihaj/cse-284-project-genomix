@@ -11,23 +11,12 @@ To install Mini-Gnomix, follow these steps:
     git clone --recursive https://github.com/esihaj/cse-284-project-genomix.git
     cd cse-284-project-genomix
     ```
+2. Install the dependencies
+   ```bash
+   ./dependencies.sh
+   ```
 
-2. Set up a virtual environment (optional but recommended):
-
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # Unix/MacOS
-    # or
-    venv\Scripts\activate  # Windows
-    ```
-
-3. Install the required dependencies:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. Install Mini-Gnomix:
+3. Install Mini-Gnomix:
 
     ```bash
     pip install --editable .
