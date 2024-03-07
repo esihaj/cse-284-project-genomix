@@ -18,7 +18,7 @@ def print_red(text):
     print("\033[91m{}\033[00m" .format(text))
     
 def print_yellow(text):
-    print("\033[93m{}\033[00m" .format(text)
+    print("\033[93m{}\033[00m" .format(text))
     
 @app.command()
 def greet(name: str = typer.Argument(None, help="Your name")):
@@ -35,7 +35,10 @@ def train(name: str = typer.Argument(None, help="Your name")):
         'chm': '22',
         'config_file': "./config.yaml"
     }
-    data = get_training_data(base_args)     
+    data, meta = get_training_data(base_args)
+    print_green ("Data loaded successfully!")
+    print("data shape: ", data.shape)
+    print("meta: ", meta)
        
 @app.command()
 def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",

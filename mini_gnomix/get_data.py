@@ -1,4 +1,5 @@
 import os
+import sys
 import yaml
 
 sys.path.append('./external/gnomix/')
@@ -51,4 +52,4 @@ def _get_data_using_gnomix(config, data_path, verbose):
     window_size_cM = config["model"].get("window_size_cM", 1)  # Default value as an example
 
     # The actual call to `get_data`, adjust according to its signature
-    return gnomix_get_data(data_path, generations, window_size_cM, verbose=verbose)
+    return gnomix_get_data(data_path, generations, window_size_cM)
