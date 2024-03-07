@@ -21,7 +21,8 @@ def print_yellow(text):
     print("\033[93m{}\033[00m" .format(text))
     
 @app.command()
-def analyze(query_file: Annotated[str, typer.Argument()] = "small_query_chr22.vcf.gz",):
+def analyze(query_file: Annotated[str, typer.Argument()] = "small_query_chr22.vcf.gz",
+            model_path: Annotated[str, typer.Argument()] = "./data/output/model"):
     """Perform local ancestry inference on a query file """
     print_green("Analyzing the query file...")
  
