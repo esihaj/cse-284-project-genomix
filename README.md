@@ -36,7 +36,7 @@ To install Mini-Gnomix, follow these steps:
 To use Mini-Gnomix, run the following command:
 
 ```bash
-mini-gnomix "Your Name"
+mini-gnomix simulate-data
 ```
 
 
