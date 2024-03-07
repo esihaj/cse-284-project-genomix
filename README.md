@@ -15,8 +15,14 @@ To install Mini-Gnomix, follow these steps:
    ```bash
    ./dependencies.sh
    ```
-
-3. Install Mini-Gnomix:
+3. Activate the python virtual env
+   ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # Unix/MacOS
+    # or
+    venv\Scripts\activate  # Windows
+    ```
+4. Install Mini-Gnomix:
 
     ```bash
     pip install --editable .
