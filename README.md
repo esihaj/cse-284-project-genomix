@@ -21,6 +21,25 @@ To install Mini-Gnomix, follow these steps:
    ```bash
    ./dependencies.sh
    ```
+2.1 If you encounter any problem here because of the wget from Github due to the proxy status of your server, you can choose to download the file into your local computer and bypass this command
+```
+wget https://github.com/samtools/bcftools/releases/download/1.19/bcftools-1.19.tar.bz2 -O bcftools.tar.bz2
+```
+You then need to manually run the following commands
+```tar -xjvf bcftools.tar.bz2
+    cd bcftools-1.19
+    make -j`nproc`
+    sudo make prefix=/usr/local/bin install
+    sudo ln -s /usr/local/bin/bin/bcftools /usr/bin/bcftools
+```
+If you don't have sudo access, try the following lines to create symbolic link and bypass the above last two lines
+```
+make prefix=~/local install
+export PATH="$HOME/local/bin:$PATH"
+source ~/.bashrc
+```
+Then, rerun the entire dependencies.sh
+   
 3. Activate the python virtual env
    ```bash
     python3 -m venv venv
