@@ -239,9 +239,6 @@ def simulate_data(data_path: Annotated[str, typer.Argument()] = "./demo/data/",
     if exit_code != 0:
         print("Error running train command. Exiting...")
         sys.exit(1)
-    
-    
-    
 
 if __name__ == "__main__":
     app()

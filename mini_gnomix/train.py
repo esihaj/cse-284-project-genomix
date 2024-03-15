@@ -225,7 +225,44 @@ class XGBBase(Base):
                 n_jobs=n_jobs, missing=self.missing_encoding, random_state=self.seed)
         )
 
+class NBGaussianBase(Base):
 
+    def __init__(self,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        from sklearn.naive_bayes import GaussianNB
+        
+        self.base_multithread = True
+
+        self.init_base_models(
+            lambda : GaussianNB()
+        )
+
+class KNNBase(Base):
+    
+    def __init__(self,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        from sklearn.neighbors import KNeighborsClassifier
+
+        self.base_multithread = True
+
+        self.init_base_models(
+            lambda : KNeighborsClassifier(n_neighbors=1)
+        )
+
+class SVMBase(Base):
+
+    def __init__(self,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.log_inference = True # display progress of predict proba
+        self.train_admix = False # save computation
+        self.base_multithread = True
+
+        self.init_base_models(
+            lambda : svm.SVC(C=100., gamma=0.001, probability=True)
+        )
 
 
 class XGB_Smoother(Smoother):
@@ -286,12 +323,14 @@ class Gnomix():
         self.calibrate = calibrate
 
         # base = LogisticRegressionBase
-        base = XGBBase
-        if verbose:
-            print("Base models:", base)
+        # base = XGBBase
+        base = NBGaussianBase
+        # base = NBBernoulliBase
+        # base = KNNBase
+        # base = SVMBase
+        print("Base models:", base)
         smooth = XGB_Smoother
-        if verbose:
-            print("Smoother:", smooth)
+        print("Smoother:", smooth)
 
         self.base = base(chm_len=self.C, window_size=self.M, num_ancestry=self.A,
                             missing_encoding=missing_encoding, context=self.context,
@@ -364,6 +403,12 @@ class Gnomix():
             y_t2_pred = self.smooth.predict(B_t2)
             Acc["base_train_acc"],   Acc["base_train_acc_bal"]   = self.base.evaluate(X=None,   y=y_t1, B=B_t1)
             Acc["smooth_train_acc"], Acc["smooth_train_acc_bal"] = self.smooth.evaluate(B=None, y=y_t2, y_pred=y_t2_pred)
+
+            bta, btab = Acc["base_train_acc"],   Acc["base_train_acc_bal"]
+            sta, stab  = Acc["smooth_train_acc"], Acc["smooth_train_acc_bal"]
+            
+            print(f"base_train_acc: {bta}, base_train_acc_bal: {btab} ")
+            print(f"smooth_train_acc: {sta}  smooth_train_acc_bal: {stab}")
             CM["train"] = self.conf_matrix(y=y_t1, y_pred=y_t1_pred)
             
             # val accuracy
@@ -372,6 +417,12 @@ class Gnomix():
                 y_v_pred  = self.smooth.predict(B_v)
                 Acc["base_val_acc"],     Acc["base_val_acc_bal"]     = self.base.evaluate(X=None,   y=y_v,  B=B_v )
                 Acc["smooth_val_acc"],   Acc["smooth_val_acc_bal"]   = self.smooth.evaluate(B=None, y=y_v,  y_pred=y_v_pred )
+
+                bva, bvab = Acc["base_val_acc"],   Acc["base_val_acc_bal"]
+                sva, svab  = Acc["smooth_val_acc"], Acc["smooth_val_acc_bal"]
+
+                print(f"base_val_acc: {bva}, base_val_acc_bal: {bvab} ")
+                print(f"smooth_val_acc: {sva}  smooth_val_acc_bal: {svab}")
                 CM["val"] = self.conf_matrix(y=y_v, y_pred=y_v_pred)
 
             self.accuracies = Acc
