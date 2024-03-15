@@ -68,8 +68,8 @@ mini-gnomix analyze
 
 - [x] generate simulation data
 - [x] read and parse data
-- [ ] train model
-- [ ] analyze samples 
+- [x] train model
+- [x] analyze samples 
 
 ## License
 Inherited From [gnomix](https://github.com/AI-sandbox/gnomix/blob/main/LICENSE.md)
