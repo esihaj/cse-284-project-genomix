@@ -21,6 +21,8 @@ To install Mini-Gnomix, follow these steps:
    ```bash
    ./dependencies.sh
    ```
+This file downloads the 1000 Genome chromosome 22 data, installs bcftools, sets up a python venv and install pip requirements.txt.
+
 2.1 If you encounter any problem here because of the wget from Github due to the proxy status of your server, you can choose to download the file into your local computer and bypass this command
 ```
 wget https://github.com/samtools/bcftools/releases/download/1.19/bcftools-1.19.tar.bz2 -O bcftools.tar.bz2
@@ -42,10 +44,7 @@ Then, rerun the entire dependencies.sh
    
 3. Activate the python virtual env
    ```bash
-    python3 -m venv venv
     source venv/bin/activate  # Unix/MacOS
-    # or
-    venv\Scripts\activate  # Windows
     ```
 4. Install Mini-Gnomix:
 
@@ -61,8 +60,9 @@ To use Mini-Gnomix, run the following command:
 mini-gnomix --help # to list all the commands
 mini-gnomix simulate-data
 mini-gnomix train
-mini-gnomix analyze
 ```
+
+Please be aware that the simulate-data command may display error messages upon completion. These are typically caused by mismatches in dependency versions but occur only during the final stage of saving configuration files with gnomix. These errors do not affect the operation's outcome and can be safely disregarded.
 
 ## TODO
 
